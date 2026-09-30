@@ -1,18 +1,15 @@
 # 🎬 Movie Recommendation System
 
-A Machine Learning-based Movie Recommendation System built using **Python**, **Pandas**, **Scikit-learn**, and **Streamlit**. The application recommends five similar movies based on the selected movie using **Content-Based Filtering** and **Cosine Similarity**.
-
----
+A Machine Learning-based Movie Recommendation System built using **Python, Pandas, Scikit-learn, NLTK, and Streamlit**. The application recommends five similar movies for a selected movie using **Content-Based Filtering** and **Cosine Similarity**.
 
 ## 🚀 Features
 
 - 🎥 Recommend 5 similar movies
-- 🔍 Search movies from a dropdown
+- 🔍 Select movies from an interactive dropdown
 - ⚡ Fast recommendations using Cosine Similarity
-- 💻 Simple and interactive Streamlit interface
-- 📊 Built using NLP techniques
-
----
+- 💻 Interactive Streamlit web interface
+- 📊 NLP-based text feature processing
+- 🧠 Precomputed similarity matrix for fast inference
 
 ## 🛠️ Tech Stack
 
@@ -24,106 +21,125 @@ A Machine Learning-based Movie Recommendation System built using **Python**, **P
 - Streamlit
 - Pickle
 
----
-
-## 📂 Dataset
-
-This project uses the **TMDB 5000 Movies Dataset**.
-
-Files used:
-- `tmdb_5000_movies.csv`
-- `tmdb_5000_credits.csv`
-
----
-
 ## 🧠 Machine Learning Workflow
 
-1. Load movie and credits datasets
-2. Merge datasets
-3. Select important features
-4. Handle missing values
-5. Convert JSON-like columns using `ast.literal_eval()`
-6. Extract:
-   - Genres
-   - Keywords
-   - Cast (Top 3)
-   - Director
-7. Combine features into a single **tags** column
-8. Apply text preprocessing and stemming
-9. Convert text into vectors using **CountVectorizer**
-10. Calculate similarity using **Cosine Similarity**
-11. Save processed data using Pickle
-12. Build an interactive Streamlit application
-
----
+1. Prepare movie metadata and credits.
+2. Select relevant movie features.
+3. Handle missing values.
+4. Extract genres, keywords, cast, and director information.
+5. Combine relevant information into a `tags` feature.
+6. Apply text preprocessing and stemming.
+7. Convert movie tags into numerical vectors using `CountVectorizer`.
+8. Calculate movie-to-movie similarity using Cosine Similarity.
+9. Save the processed movie data and similarity matrix using Pickle.
+10. Use the saved files in the Streamlit application.
 
 ## 📁 Project Structure
 
-```
-Movie-Recommendation-System/
+```text
+MOVIE_RECOMMENDATION_SYSTEM/
 │
 ├── app.py
+├── generate_similarity.py
 ├── movie_list.pkl
 ├── similarity.pkl
-├── tmdb_5000_movies.csv
-├── tmdb_5000_credits.csv
+├── movierecommender.ipynb
 ├── requirements.txt
 └── README.md
 ```
 
----
+### Generated Model Files
+
+- `movie_list.pkl` — serialized movie dataframe used by the application.
+- `similarity.pkl` — precomputed movie similarity matrix.
+- `generate_similarity.py` — script used to generate and validate `similarity.pkl`.
+
+> `similarity.pkl` is a large binary file and is intended to be stored using **Git LFS** when it exceeds GitHub's normal web-upload limit.
 
 ## 📦 Installation
 
-Clone the repository
+Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/movie-recommendation-system.git
+git clone https://github.com/Omi809/MOVIE_RECOMMENDATION_SYSTEM.git
 ```
 
-Move into the project directory
+Move into the project directory:
 
 ```bash
-cd movie-recommendation-system
+cd MOVIE_RECOMMENDATION_SYSTEM
 ```
 
-Install dependencies
+Create and activate a virtual environment:
 
-```bash
-pip install -r requirements.txt
+### Windows PowerShell
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 ```
 
----
+Install dependencies:
+
+```powershell
+python -m pip install -r requirements.txt
+```
 
 ## ▶️ Run the Application
 
-```bash
-streamlit run app.py
+Start the Streamlit application:
+
+```powershell
+python -m streamlit run app.py
 ```
 
----
+The application will normally be available at:
 
-## 📸 Application Preview
+```text
+http://localhost:8501
+```
 
-- Select a movie from the dropdown.
-- Click the **Recommend** button.
-- Get five similar movie recommendations instantly.
+## 🔧 Regenerate the Similarity Matrix
 
----
+If `similarity.pkl` needs to be regenerated:
+
+```powershell
+.\.venv\Scripts\python.exe generate_similarity.py
+```
+
+The generated matrix is validated against the movie list before it is used by the application.
+
+## ☁️ Deployment
+
+This application can be deployed using **Streamlit Community Cloud**.
+
+Deployment requirements:
+
+- GitHub repository
+- `app.py`
+- `movie_list.pkl`
+- `similarity.pkl`
+- `requirements.txt`
+
+After deployment, the application can be accessed through its public Streamlit URL without keeping the development laptop running.
+
+## 📸 Application Usage
+
+1. Open the Streamlit application.
+2. Select a movie from the dropdown.
+3. Click **Recommend**.
+4. The application displays five similar movie recommendations.
 
 ## 📚 Libraries Used
 
-```python
+```text
 pandas
 numpy
 streamlit
 scikit-learn
 nltk
 pickle
-ast
 ```
-
----
 
 ## 🎯 Future Improvements
 
@@ -131,20 +147,16 @@ ast
 - Display movie overview
 - Show IMDb/TMDB ratings
 - Filter recommendations by genre
-- Deploy on Streamlit Community Cloud
 - Add search suggestions
-- Improve UI with custom CSS
-
----
+- Improve the UI with custom CSS
+- Deploy and maintain the application on Streamlit Community Cloud
 
 ## 👨‍💻 Author
 
-**Swapnil**
+**Omii / Omi809**
 
 Engineering Student | Python | Machine Learning | Web Development
 
----
+## ⭐ Project
 
-## ⭐ If you like this project
-
-Give this repository a ⭐ on GitHub and feel free to contribute or share your suggestions.
+If you find this project useful, consider starring the repository and contributing improvements.
